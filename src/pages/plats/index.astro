@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const published = (await getCollection('plats')).filter((e) => !e.data.draft);
+---
+<Base path="/plats/" title="Tes plats décryptés · gooodeat"
+  description="Ce que contiennent vraiment tes plats préférés et comment les rééquilibrer, sans calories. L'approche qualitative gooodeat, relue par une diététicienne."
+  noindex={published.length === 0}>
+  <section class="page-head wrap">
+    <span class="eyebrow">Plats décryptés</span>
+    <h1>Ce qu'il y a vraiment dans ton assiette</h1>
+    <p class="lede center" style="margin-top:1rem">La composition de tes plats préférés et comment les rééquilibrer. Sans calories, sans jugement.</p>
+  </section>
+  <section class="section" style="padding-top:1rem">
+    <div class="wrap">
+      {published.length === 0 ? (
+        <p class="center lede" style="margin-inline:auto">Les premiers plats décryptés arrivent très bientôt.</p>
+      ) : (
+        <div class="grid">
+          {published.map((e) => (
+            <a class="card" href={`/plats/${e.id}/`}>
+              <h3>{e.data.title}</h3>
+              <p>{e.data.description}</p>
+              <span class="hl" style="font-weight:700">Voir le plat →</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

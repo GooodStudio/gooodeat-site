@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const published = (await getCollection('guides')).filter((e) => !e.data.draft);
+---
+<Base path="/guides/" title="Guides nutrition · gooodeat"
+  description="Des réponses claires pour mieux manger sans compter les calories : équilibre, familles d'aliments, microbiote, plaisir. Relu par une diététicienne."
+  noindex={published.length === 0}>
+  <section class="page-head wrap">
+    <span class="eyebrow">Guides</span>
+    <h1>Mieux manger, expliqué simplement</h1>
+    <p class="lede center" style="margin-top:1rem">Des réponses concrètes, sans calories ni injonctions. Relues par une diététicienne.</p>
+  </section>
+  <section class="section" style="padding-top:1rem">
+    <div class="wrap">
+      {published.length === 0 ? (
+        <p class="center lede" style="margin-inline:auto">Nos premiers guides arrivent très bientôt.</p>
+      ) : (
+        <div class="grid">
+          {published.map((e) => (
+            <a class="card" href={`/guides/${e.id}/`}>
+              <h3>{e.data.title}</h3>
+              <p>{e.data.description}</p>
+              <span class="hl" style="font-weight:700">Lire le guide →</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>

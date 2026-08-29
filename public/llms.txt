@@ -1,0 +1,23 @@
+# gooodeat
+
+> gooodeat est une application mobile (iOS et Android) qui aide à mieux manger sans compter les calories. On prend une photo de son repas, l'assistant Floris identifie ce qu'on mange et en donne un équilibre qualitatif par familles d'aliments (légumes, protéines, céréales complètes, fruits, oléagineux). Approche non culpabilisante, fondée sur les recommandations du Conseil Supérieur de la Santé (Belgique) 2019 et sur EAT-Lancet 2019.
+
+## Principes
+- Pas de comptage de calories, pas de macros, pas de grammes affichés : une approche qualitative et visuelle.
+- Métaphore du compte en banque : un repas nutritif est un apport, un repas plaisir un retrait nécessaire. C'est l'équilibre sur la durée qui compte, pas la perfection quotidienne.
+- Aucun aliment n'est interdit ; on cherche à compléter et rééquilibrer, jamais à supprimer.
+
+## Pages principales
+- Accueil : https://www.gooodeat.com/
+- Prix : https://www.gooodeat.com/prix/
+- Télécharger (iOS + Android) : https://www.gooodeat.com/telecharger/
+- Guides nutrition : https://www.gooodeat.com/guides/
+- Plats décryptés : https://www.gooodeat.com/plats/
+- Contact : https://www.gooodeat.com/contact/
+
+## Application
+- iOS : https://apps.apple.com/app/habitude-gooodeat/id6770682706
+- Android : https://play.google.com/store/apps/details?id=com.gooodeat.app
+
+## Éditeur
+- Goood Studio SRL, Namur, Belgique. Contenu nutritionnel relu par une diététicienne.

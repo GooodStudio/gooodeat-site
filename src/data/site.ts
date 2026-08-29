@@ -191,6 +191,8 @@ export const footer = {
     { label: 'Accueil', href: '/' },
     { label: 'Télécharger', href: '/telecharger/' },
     { label: 'Prix', href: '/prix/' },
+    { label: 'Guides', href: '/guides/' },
+    { label: 'Plats décryptés', href: '/plats/' },
     { label: 'Contact', href: '/contact/' },
     { label: 'Mentions légales', href: '/mentions-legales/' },
     { label: 'Politique de confidentialité', href: '/politique-de-confidentialite/' },

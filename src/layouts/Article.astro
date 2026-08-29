@@ -1,0 +1,139 @@
+---
+import Base from './Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { site } from '../data/site';
+
+interface Crumb { label: string; href: string; }
+interface Props {
+  kind: 'guide' | 'plat';
+  slug: string;
+  title: string;
+  description: string;
+  answer?: string;
+  updated?: Date;
+  reviewedBy?: string;
+  faq?: { q: string; r: string }[];
+  sources?: { label: string; url?: string }[];
+  familles?: { nom: string; part: number; couleur?: string }[];
+  equilibrer?: string[];
+  draft?: boolean;
+  crumbs: Crumb[];
+}
+
+const {
+  kind, slug, title, description, answer, updated, reviewedBy,
+  faq = [], sources = [], familles = [], equilibrer = [], draft = false, crumbs,
+} = Astro.props;
+
+const path = `/${kind === 'guide' ? 'guides' : 'plats'}/${slug}/`;
+const canonical = new URL(path, site.domaine).href;
+const dateISO = (updated ?? new Date('2026-08-29')).toISOString();
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((c, i) => ({
+    '@type': 'ListItem', position: i + 1, name: c.label, item: new URL(c.href, site.domaine).href,
+  })),
+};
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'fr-BE',
+  datePublished: dateISO,
+  dateModified: dateISO,
+  author: { '@type': 'Person', name: 'Anne-Charlotte', jobTitle: 'Diététicienne' },
+  publisher: { '@type': 'Organization', name: 'gooodeat', logo: { '@type': 'ImageObject', url: new URL('/img/logo.png', site.domaine).href } },
+  mainEntityOfPage: canonical,
+};
+const faqLd = faq.length ? {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.r } })),
+} : null;
+const jsonld = [breadcrumbLd, articleLd, ...(faqLd ? [faqLd] : [])];
+---
+
+<Base title={`${title} · gooodeat`} description={description} path={path} jsonld={jsonld} noindex={draft}>
+  <article class="section" style="padding-top:2rem">
+    <div class="wrap prose">
+      <!-- fil d'ariane -->
+      <nav aria-label="Fil d'ariane" class="crumbs">
+        {crumbs.map((c, i) => (
+          <span>{i > 0 && <span class="sep">/</span>}<a href={c.href}>{c.label}</a></span>
+        ))}
+      </nav>
+
+      {draft && (
+        <p class="review-flag">🕓 Contenu en relecture par une diététicienne. Non publié tant que la validation scientifique n'est pas faite.</p>
+      )}
+
+      <h1>{title}</h1>
+      <p class="byline">Rédigé pour gooodeat · relu par {reviewedBy} {updated && <>· mis à jour le {updated.toLocaleDateString('fr-BE')}</>}</p>
+
+      {answer && <div class="answer-box"><strong>En bref.</strong> {answer}</div>}
+
+      {familles.length > 0 && (
+        <div class="famille-card">
+          <h2 style="margin-top:0">Composition typique</h2>
+          <p class="muted">Approche qualitative gooodeat, agrégée et anonymisée. Pas de calories, pas de grammes.</p>
+          {familles.map((f) => (
+            <div class="bar-row"><span class="lab">{f.nom}</span><span class="bar"><span style={`width:${f.part}%;background:${f.couleur ?? 'var(--accent)'}`}></span></span><b>{f.part}%</b></div>
+          ))}
+        </div>
+      )}
+
+      <slot />
+
+      {equilibrer.length > 0 && (
+        <>
+          <h2>Comment le rééquilibrer</h2>
+          <ul>{equilibrer.map((e) => <li>{e}</li>)}</ul>
+        </>
+      )}
+
+      {faq.length > 0 && (
+        <>
+          <h2>Questions fréquentes</h2>
+          <div class="faq">
+            {faq.map((f, i) => (
+              <details open={i === 0}>
+                <summary>{f.q}<span class="plus">+</span></summary>
+                <p>{f.r}</p>
+              </details>
+            ))}
+          </div>
+        </>
+      )}
+
+      {sources.length > 0 && (
+        <>
+          <h2>Sources</h2>
+          <ul>
+            {sources.map((s) => <li>{s.url ? <a href={s.url} target="_blank" rel="noopener">{s.label}</a> : s.label}</li>)}
+          </ul>
+        </>
+      )}
+
+      <div class="article-cta">
+        <h3 style="margin-top:0">Scanne ton assiette avec gooodeat</h3>
+        <p>Prends une photo de ton repas, Floris t'en donne l'équilibre. Sans calories, sans culpabilité.</p>
+        <StoreButtons />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .crumbs { font-size: .9rem; color: var(--muted); margin-bottom: 1rem; }
+  .crumbs a { color: var(--muted); }
+  .crumbs a:hover { color: var(--accent-dark); }
+  .crumbs .sep { margin: 0 .5rem; opacity: .5; }
+  .byline { color: var(--muted); font-size: .92rem; margin-top: -.3rem; }
+  .review-flag { background: #fff4e5; border: 1px solid #ffd9a8; color: #8a5a00; padding: .7rem 1rem; border-radius: 12px; font-size: .92rem; }
+  .answer-box { background: var(--accent-tint); border-left: 4px solid var(--accent); padding: 1rem 1.2rem; border-radius: 12px; margin: 1.4rem 0; font-size: 1.05rem; color: var(--ink); }
+  .famille-card { background: var(--bg-soft); border-radius: var(--radius); padding: 1.3rem 1.4rem; margin: 1.5rem 0; }
+  .article-cta { margin-top: 2.5rem; background: var(--bg-warm); border-radius: var(--radius-lg); padding: 1.6rem; }
+  .article-cta .stores { margin-top: 1rem; }
+</style>

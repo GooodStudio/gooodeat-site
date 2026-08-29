@@ -12,6 +12,8 @@ interface Props {
   /** JSON-LD supplémentaire (objet ou tableau) */
   jsonld?: unknown;
   ogImage?: string;
+  /** true => noindex,nofollow (contenus en relecture avant validation) */
+  noindex?: boolean;
 }
 
 const {
@@ -20,6 +22,7 @@ const {
   path = '/',
   jsonld,
   ogImage = site.ogImage,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(path, site.domaine).href;
@@ -57,6 +60,7 @@ const graphs = [orgLd, appLd, ...(Array.isArray(jsonld) ? jsonld : jsonld ? [jso
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#ff8000" />
 
