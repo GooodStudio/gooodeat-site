@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+interface Props { align?: 'start' | 'center'; }
+const { align = 'start' } = Astro.props;
+---
+<div class="stores" style={align === 'center' ? 'justify-content:center' : ''}>
+  <a class="store-btn" href={site.stores.ios} target="_blank" rel="noopener" aria-label="Télécharger gooodeat sur l'App Store">
+    <svg class="glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.365 1.43c0 1.14-.42 2.2-1.12 2.99-.76.87-2 .95-2.06.95-.09-1.1.44-2.19 1.1-2.94.74-.85 2-.98 2.08-1zm3.9 16.06c-.57 1.31-.84 1.89-1.57 3.04-1.02 1.6-2.46 3.6-4.24 3.61-1.59.02-2-1.03-4.15-1.02-2.15.01-2.6 1.04-4.19 1.02-1.78-.01-3.14-1.8-4.16-3.4C-.9 18.02-1.14 13.5.68 11.1c.9-1.19 2.3-1.94 3.62-1.94 1.35 0 2.2.94 4.13.94 1.9 0 2.7-.94 4.3-.94 1.18 0 2.43.64 3.32 1.75-2.92 1.6-2.44 5.77.22 6.58z"/>
+    </svg>
+    <span class="lines"><span class="small">Télécharger sur</span><span class="big">l'App Store</span></span>
+  </a>
+  <a class="store-btn" href={site.stores.android} target="_blank" rel="noopener" aria-label="Télécharger gooodeat sur Google Play">
+    <svg class="glyph" viewBox="0 0 512 512" aria-hidden="true">
+      <path fill="#00e676" d="M65 45c-6 3-10 9-10 18v386c0 9 4 15 10 18l224-211z"/>
+      <path fill="#00b0ff" d="M65 45l224 211 61-58L104 33c-16-9-30-4-39 12z"/>
+      <path fill="#ff3d00" d="M65 467c9 16 23 21 39 12l246-165-61-58z"/>
+      <path fill="#ffea00" d="M411 219l-61-35-61 58 61 58 61-35c18-11 18-35 0-46z"/>
+    </svg>
+    <span class="lines"><span class="small">Disponible sur</span><span class="big">Google Play</span></span>
+  </a>
+</div>

@@ -1,0 +1,278 @@
+---
+import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { hero, vision, etapes, outils, cuisine, offres, faq } from '../data/site';
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.r },
+  })),
+};
+
+const foodIcons = [
+  { src: '/img/fr/ico-salade.png', alt: 'Bol de salade' },
+  { src: '/img/fr/ico-pizza.png', alt: 'Pizza' },
+  { src: '/img/fr/ico-ramen.png', alt: 'Ramen' },
+  { src: '/img/fr/ico-chocolat.png', alt: 'Chocolat' },
+  { src: '/img/fr/ico-viande.png', alt: 'Viande' },
+  { src: '/img/fr/ico-sandwich.png', alt: 'Sandwich' },
+  { src: '/img/fr/ico-saumon.png', alt: 'Saumon' },
+];
+
+const burgerLayers = [
+  { src: '/img/fr/burger-1-bun-top.png', alt: 'Pain supérieur du burger' },
+  { src: '/img/fr/burger-4-lettuce.png', alt: 'Salade' },
+  { src: '/img/fr/burger-2-tomato.png', alt: 'Tomates et oignons' },
+  { src: '/img/fr/burger-3-patty.png', alt: 'Steak et fromage' },
+  { src: '/img/fr/burger-5-bun-bottom.png', alt: 'Pain inférieur du burger' },
+];
+
+const outilsShots = [
+  { ...outils.items[0], img: '/img/fr/shot-1.png' },
+  { ...outils.items[1], img: '/img/fr/shot-2.png' },
+  { ...outils.items[2], img: '/img/fr/shot-3.png' },
+  { ...outils.items[3], img: '/img/30-vegetaux.png' },
+];
+
+const gallery = [
+  { src: '/img/fr/play/s2.png', alt: 'gooodeat, déculpabilise ton alimentation' },
+  { src: '/img/fr/play/s3.png', alt: 'Visualise enfin le contenu de tes plats' },
+  { src: '/img/fr/play/s4.png', alt: 'Scanne, comprends, savoure' },
+  { src: '/img/fr/play/s5.png', alt: 'La science derrière chaque bouchée' },
+];
+---
+
+<Base path="/" jsonld={faqLd}>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy reveal">
+        <span class="hero-badge">🥗 Scanne ton repas, sans calories</span>
+        <h1>{hero.titre1}<br /><span class="hl">{hero.titreHl}</span></h1>
+        <p class="lede">{hero.lede}</p>
+        <div class="hero-cta">
+          <StoreButtons />
+          <span class="hero-note">Gratuit · sans carte bancaire · iPhone & Android</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" style="--d:.12s">
+        <div class="chip floaty" style="top:14%;left:-2%;--fd:.2s">
+          <span class="dot" style="background:var(--green)"></span>
+          <span>Légumes<small>généreux</small></span>
+        </div>
+        <div class="chip floaty" style="top:46%;right:-4%;--fd:1.1s">
+          <span class="dot" style="background:var(--accent)"></span>
+          <span>Protéines<small>35%</small></span>
+        </div>
+        <img class="floaty" src="/img/fr/ico-salade.png" alt="" aria-hidden="true" style="position:absolute;width:70px;bottom:8%;left:-4%;--fd:.6s" />
+        <img class="floaty" src="/img/fr/ico-saumon.png" alt="" aria-hidden="true" style="position:absolute;width:62px;top:2%;right:8%;--fd:1.4s" />
+
+        <div class="device">
+          <div class="screen">
+            <div class="screen-pad">
+              <div class="mini-tag">🍔 Scanne ton repas</div>
+              <img class="food-photo" src="/img/burger.webp" alt="Burger classique scanné par gooodeat" width="280" height="180" loading="eager" />
+              <div class="mini-card">
+                <div class="mini-title">Burger classique</div>
+                <div class="bar-row"><span class="lab">Protéines</span><span class="bar"><span style="width:35%"></span></span><b>35%</b></div>
+                <div class="bar-row"><span class="lab">Céréales</span><span class="bar"><span style="width:33%"></span></span><b>33%</b></div>
+                <div class="bar-row"><span class="lab">Légumes</span><span class="bar"><span style="width:20%"></span></span><b>20%</b></div>
+              </div>
+              <div class="floris-note"><b>L'info Floris :</b> le fromage contient du calcium et de la vitamine K2 qui aide ce calcium à aller dans les os.</div>
+            </div>
+          </div>
+          <img class="frame" src="/img/fr/iphone-frame.png" alt="gooodeat sur iPhone" width="320" height="657" loading="eager" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÉCULPABILISE (icônes 3D + affirmations) -->
+  <section class="section section--soft">
+    <div class="wrap center">
+      <h2 class="reveal">Déculpabilise<br />ton alimentation</h2>
+      <p class="lede reveal" style="margin-top:1rem;margin-bottom:2.5rem">Pizza, ramen, chocolat, salade… tout a sa place. On dit oui au plaisir, oui à l'équilibre, oui à ton rythme.</p>
+      <div class="food-row reveal" style="margin-bottom:2rem">
+        {foodIcons.map((f, i) => <img class="floaty" src={f.src} alt={f.alt} style={`--fd:${(i * 0.25).toFixed(2)}s`} width="90" height="90" loading="lazy" />)}
+      </div>
+      <div class="affirm reveal">
+        {[0,1,2,3,4,5].map(() => (
+          <span class="pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Oui
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VOIS TON ASSIETTE AUTREMENT (déconstruction burger au scroll) -->
+  <section class="section">
+    <div class="wrap split split--rev">
+      <div class="split-media">
+        <div class="burger">
+          {burgerLayers.map((l) => <img class="layer" src={l.src} alt={l.alt} loading="lazy" />)}
+          <span class="chip" style="top:2%;--cd:.1s"><span class="dot" style="background:#c9a25b"></span>Céréales complètes</span>
+          <span class="chip" style="top:38%;--cd:.3s"><span class="dot" style="background:var(--green)"></span>Légumes</span>
+          <span class="chip" style="top:62%;--cd:.5s"><span class="dot" style="background:var(--accent)"></span>Protéines</span>
+        </div>
+      </div>
+      <div class="split-copy reveal">
+        <span class="eyebrow">Approche qualitative</span>
+        <h2>{vision.titre}</h2>
+        <p class="lede" style="margin-top:1rem">{vision.texte}</p>
+        <p style="margin-top:1rem">Chaque bouchée se décompose par famille d'aliments. Pas de grammes, pas de calories : juste la part des légumes, des protéines et des céréales complètes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBTIENS LA COMPOSITION (séquence assiette) -->
+  <section class="section section--soft">
+    <div class="wrap split">
+      <div class="split-media">
+        <div class="plate-seq">
+          <img class="on" src="/img/fr/plate-0.png" alt="Assiette vide" loading="lazy" />
+          <img src="/img/fr/plate-1-omelet.png" alt="Assiette avec omelette" loading="lazy" />
+          <img src="/img/fr/plate-2-cheese.png" alt="Assiette avec omelette et fromage" loading="lazy" />
+          <img src="/img/fr/plate-3-chicken.png" alt="Assiette avec omelette, fromage et poulet grillé" loading="lazy" />
+        </div>
+      </div>
+      <div class="split-copy reveal">
+        <span class="eyebrow">En un scan</span>
+        <h2>Obtiens la composition</h2>
+        <p class="lede" style="margin-top:1rem">Floris reconstitue ton assiette élément par élément et te montre ce qu'il y a vraiment dedans. Une vision claire, visuelle, sans jugement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">En 3 étapes</span>
+        <h2>{etapes.titre}</h2>
+      </div>
+      <div class="steps">
+        {etapes.items.map((e, i) => (
+          <div class="step reveal" style={`--d:${(i * 0.1).toFixed(2)}s`}>
+            <span class="num">{e.num}</span>
+            <h3>{e.t}</h3>
+            <p>{e.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DES OUTILS PENSÉS POUR TOI (vraies captures) -->
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <h2>{outils.titre}</h2>
+        <p class="lede">{outils.sous}</p>
+      </div>
+      <div class="grid">
+        {outilsShots.map((o, i) => (
+          <article class="card reveal" style={`--d:${(i % 2 * 0.1).toFixed(2)}s`}>
+            <img src={o.img} alt={o.alt} loading="lazy" />
+            <h3>{o.t}</h3>
+            <p>{o.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIE APP (captures store) -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <span class="eyebrow">Aperçu de l'app</span>
+        <h2>gooodeat en images</h2>
+      </div>
+      <div class="gallery">
+        {gallery.map((g) => <img src={g.src} alt={g.alt} loading="lazy" />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CUISINE AVEC FLORIS -->
+  <section class="section section--dark">
+    <div class="wrap center reveal" style="max-width:720px">
+      <span class="eyebrow">Ton assistant</span>
+      <h2>{cuisine.titre}</h2>
+      <p class="lede" style="margin:1rem auto 2rem;color:rgba(255,255,255,.72)">{cuisine.texte}</p>
+      <div class="mini-card" style="text-align:left;max-width:520px;margin-inline:auto">
+        <div class="mini-tag">💬 Toi</div>
+        <p style="margin:.6rem 0 0;color:var(--ink)">{cuisine.bulle}</p>
+      </div>
+      <p style="margin-top:1rem;color:rgba(255,255,255,.6);font-style:italic">✨ {cuisine.reflexion}…</p>
+    </div>
+  </section>
+
+  <!-- NOS OFFRES -->
+  <section class="section section--soft" id="offres">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <h2>{offres.titre}</h2>
+        <p class="lede">{offres.sous}</p>
+      </div>
+      <div class="plans">
+        {offres.plans.map((p, i) => (
+          <div class={`plan reveal ${p.surligne ? 'plan--hl' : ''}`} style={`--d:${(i * 0.08).toFixed(2)}s`}>
+            {p.surligne && <span class="plan-badge">Le plus choisi</span>}
+            <div class="plan-name">{p.nom}</div>
+            <div class="plan-price">
+              <span class="amount">{p.prix}</span>
+              {p.prixBarre && <span class="strike">{p.prixBarre}</span>}
+              <span class="per">{p.periode}</span>
+            </div>
+            <div class="plan-tag">{p.accroche}</div>
+            <a class={`btn btn--block ${p.surligne ? 'btn--primary' : 'btn--ghost'}`} href="/telecharger/">{p.cta}</a>
+            <ul class="plan-feats">
+              {p.inclus.map((f) => (
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head center reveal">
+        <h2>Questions fréquentes</h2>
+        <p class="lede">Tout ce que tu veux savoir sur gooodeat.</p>
+      </div>
+      <div class="faq reveal">
+        {faq.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}<span class="plus">+</span></summary>
+            <p>{f.r}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="section section--warm cta-final">
+    <div class="wrap reveal">
+      <span class="badge-rank">🏆 Bientôt #1 des apps nutrition</span>
+      <h2>Rejoins gooodeat aujourd'hui</h2>
+      <p class="lede center" style="margin-top:1rem">Ton alimentation, ton meilleur investissement. Commence gratuitement.</p>
+      <StoreButtons align="center" />
+    </div>
+  </section>
+</Base>

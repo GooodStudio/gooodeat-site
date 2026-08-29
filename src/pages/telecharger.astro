@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import { site } from '../data/site';
+---
+<Base
+  path="/telecharger/"
+  title="Télécharger gooodeat · iPhone & Android"
+  description="Télécharge gooodeat sur iPhone et Android. Prends une photo de ton repas, ton assistant Floris identifie ce que tu manges. Sans calories, sans culpabilité."
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="hero-badge">📲 Disponible sur iPhone & Android</span>
+        <h1>Télécharge <span class="hl">gooodeat</span> sur ton mobile</h1>
+        <p class="lede">Prends une photo de ton repas, et ton assistant Floris identifie ce que tu manges. Sans compter les calories, sans culpabilité.</p>
+        <div class="hero-cta">
+          <StoreButtons />
+          <span class="hero-note">Gratuit · 10 scans par mois offerts · sans carte bancaire</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="chip" style="top:16%;right:-4%">
+          <span class="dot" style="background:var(--accent)"></span>
+          <span>Plat riche en fer 💪</span>
+        </div>
+        <div class="phone">
+          <span class="phone-notch"></span>
+          <div class="phone-screen">
+            <div class="mini-tag">🍔 Scanne ton repas</div>
+            <img src="/img/burger.webp" alt="Burger classique scanné par gooodeat" style="border-radius:16px" width="280" height="180" loading="eager" />
+            <div class="mini-card">
+              <div class="mini-title">Burger classique</div>
+              <div class="bar-row"><span class="lab">Protéines</span><span class="bar"><span style="width:35%"></span></span><b>35%</b></div>
+              <div class="bar-row"><span class="lab">Céréales compl.</span><span class="bar"><span style="width:33%"></span></span><b>33%</b></div>
+            </div>
+            <div class="floris-note"><b>L'info Floris :</b> le fromage contient du calcium et de la vitamine K2 qui aide ce calcium à aller dans les os plutôt que dans les artères.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft center">
+    <div class="wrap" style="max-width:640px">
+      <h2>Scanne ton premier repas en 30 secondes</h2>
+      <p class="lede center" style="margin:1rem auto 2rem">Choisis ta plateforme et laisse Floris t'accompagner vers un meilleur équilibre, à ton rythme.</p>
+      <StoreButtons align="center" />
+      <p class="hero-note" style="margin-top:1.5rem">Un souci pour installer l'app ? Écris-nous à <a href={`mailto:${site.contact.email}`} style="color:var(--accent-dark);font-weight:600">{site.contact.email}</a></p>
+    </div>
+  </section>
+</Base>

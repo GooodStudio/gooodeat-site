@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { offres, faq } from '../data/site';
+---
+<Base
+  path="/prix/"
+  title="Prix · gooodeat"
+  description="Commence gratuitement, passe Premium quand tu veux. Sans pression, sans engagement. Premium à vie disponible."
+>
+  <section class="page-head wrap">
+    <h1>Nos offres</h1>
+    <p class="lede center" style="margin-top:1rem">{offres.sous}</p>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="wrap">
+      <div class="plans">
+        {offres.plans.map((p) => (
+          <div class={`plan ${p.surligne ? 'plan--hl' : ''}`}>
+            {p.surligne && <span class="plan-badge">Le plus choisi</span>}
+            <div class="plan-name">{p.nom}</div>
+            <div class="plan-price">
+              <span class="amount">{p.prix}</span>
+              {p.prixBarre && <span class="strike">{p.prixBarre}</span>}
+              <span class="per">{p.periode}</span>
+            </div>
+            <div class="plan-tag">{p.accroche}</div>
+            <a class={`btn btn--block ${p.surligne ? 'btn--primary' : 'btn--ghost'}`} href="/telecharger/">{p.cta}</a>
+            <ul class="plan-feats">
+              {p.inclus.map((f) => (
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head center"><h2>Questions fréquentes</h2></div>
+      <div class="faq">
+        {faq.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}<span class="plus">+</span></summary>
+            <p>{f.r}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

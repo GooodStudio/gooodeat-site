@@ -1,0 +1,17 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# env & secrets (jamais commit : cf règle studio Doppler)
+.env
+.env.*
+!.env.example
+
+# system
+.DS_Store

@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+// FAQ propre à la page contact (reprise fidèle de l'ancien site).
+const faqContact = [
+  { q: 'Comment puis-je vous contacter ?', r: `Envoie-nous un message via ce formulaire ou écris directement à ${site.contact.email}. On répond sous 48h.` },
+  { q: 'Je suis diététicien·ne, comment devenir partenaire ?', r: 'Tu peux rejoindre le Hub Nutriciens. Une fois connecté·e, tu accèdes au dashboard de suivi patients et au partage de recettes.' },
+  { q: "J'ai un bug ou un problème dans l'app, que faire ?", r: 'Décris-nous le problème via le formulaire ci-contre. Plus tu es précis·e, plus on peut t’aider rapidement.' },
+  { q: 'Puis-je suggérer une fonctionnalité ?', r: 'Oui, avec plaisir ! On construit gooodeat avec ses utilisateur·rices. Partage ton idée via le formulaire et on en tient compte.' },
+  { q: 'Mes données sont-elles en sécurité ?', r: 'Absolument. Tes données sont chiffrées et stockées de façon sécurisée. On ne les revend jamais. Ta vie privée est notre priorité.' },
+];
+---
+<Base
+  path="/contact/"
+  title="Contact · gooodeat"
+  description="Une question sur gooodeat ? Écris-nous. On est là pour toi, que tu sois utilisateur·rice, diététicien·ne partenaire, ou juste curieux·se."
+>
+  <section class="page-head wrap">
+    <h1>Contacte-nous</h1>
+    <p class="lede center" style="margin-top:1rem">On est là pour toi, que tu sois utilisateur·rice, diététicien·ne partenaire, ou juste curieux·se.</p>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="wrap contact-grid">
+      <!-- TODO endpoint : remplacer l'action par un vrai endpoint Formspree
+           (formspree.io, gratuit) ou une edge function Supabase. En attendant,
+           le lien mailto ci-contre reste le canal fiable. -->
+      <form class="contact-form" action="https://formspree.io/f/REMPLACER" method="POST">
+        <div class="field-row">
+          <div class="field">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" name="prenom" type="text" autocomplete="given-name" required />
+          </div>
+          <div class="field">
+            <label for="nom">Nom</label>
+            <input id="nom" name="nom" type="text" autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="sujet">C'est à propos de ?</label>
+          <select id="sujet" name="sujet">
+            <option value="">Sélectionner…</option>
+            <option>Support</option>
+            <option>Feedback</option>
+            <option>Collaboration</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit">Envoyer</button>
+      </form>
+
+      <aside class="contact-side">
+        <div class="info-card">
+          <h4>Email</h4>
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+        </div>
+        <div class="info-card">
+          <h4>Instagram</h4>
+          <a href={site.contact.instagram} target="_blank" rel="noopener">{site.contact.instagramHandle}</a>
+        </div>
+        <div class="info-card">
+          <h4>Nutriciens</h4>
+          <p style="font-size:.92rem">Plateforme d'entraide par et pour diététicien·nes.</p>
+          <a href="https://www.nutriciens.com" target="_blank" rel="noopener">nutriciens.com</a>
+        </div>
+        <div class="info-card">
+          <h4>Nutristant</h4>
+          <p style="font-size:.92rem">La suite d'agents IA au service des professionnel·les de la nutrition.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="wrap">
+      <div class="section-head center"><h2>Questions fréquentes</h2><p class="lede">Tout ce que tu veux savoir.</p></div>
+      <div class="faq">
+        {faqContact.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}<span class="plus">+</span></summary>
+            <p>{f.r}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

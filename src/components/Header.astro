@@ -1,0 +1,16 @@
+---
+import { nav, site } from '../data/site';
+---
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="gooodeat, accueil">
+      <img src="/img/logo.png" alt="gooodeat" width="120" height="34" />
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn--primary" href={site.stores.ios} target="_blank" rel="noopener">Télécharger</a>
+    </div>
+  </div>
+</header>

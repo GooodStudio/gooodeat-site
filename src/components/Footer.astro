@@ -1,0 +1,32 @@
+---
+import { footer, site } from '../data/site';
+const year = 2026;
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/img/logo.png" alt="gooodeat" width="140" height="40" />
+        <p>Déculpabilise ton alimentation. Scanne tes repas, comprends ton assiette, avance à ton rythme avec ton assistant Floris.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          {footer.liens.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Suivre gooodeat</h4>
+        <ul>
+          <li><a href={site.contact.instagram} target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href={site.contact.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© {year} gooodeat · Goood Studio SRL, Namur</span>
+      <span>Fait avec soin en Belgique</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,145 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Chemin canonique, ex: "/prix/" */
+  path?: string;
+  /** JSON-LD supplémentaire (objet ou tableau) */
+  jsonld?: unknown;
+  ogImage?: string;
+}
+
+const {
+  title = site.titre,
+  description = site.description,
+  path = '/',
+  jsonld,
+  ogImage = site.ogImage,
+} = Astro.props;
+
+const canonical = new URL(path, site.domaine).href;
+const ogUrl = new URL(ogImage, site.domaine).href;
+
+// JSON-LD de base : l'organisation + l'application. Présent sur toutes les pages.
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Goood Studio',
+  url: site.domaine,
+  logo: new URL('/img/logo.png', site.domaine).href,
+  sameAs: [site.contact.instagram, site.contact.linkedin],
+};
+const appLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'gooodeat',
+  operatingSystem: 'iOS, Android',
+  applicationCategory: 'HealthApplication',
+  description: site.description,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  downloadUrl: [site.stores.ios, site.stores.android],
+};
+const graphs = [orgLd, appLd, ...(Array.isArray(jsonld) ? jsonld : jsonld ? [jsonld] : [])];
+---
+
+<!doctype html>
+<html lang="fr-BE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ff8000" />
+
+    <!-- Open Graph / partage -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="gooodeat" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:locale" content="fr_BE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+
+    <!-- Polices : Satoshi (display) via Fontshare + Inter (texte) via Google Fonts -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,900,400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(graphs)} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Aller au contenu</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Couche d'animation (reproduit les effets Framer, vanilla, sans lib).
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 1) Reveals au scroll
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('.reveal, .burger').forEach((el) => io.observe(el));
+
+      if (!reduce) {
+        // 2) Déconstruction burger : scrub selon la position dans le viewport
+        const burger = document.querySelector('.burger');
+        const layers = burger ? [...burger.querySelectorAll('.layer')] : [];
+        const chips = burger ? [...burger.querySelectorAll('.chip')] : [];
+        // 3) Séquence assiette : révèle les couches selon la progression
+        const seq = document.querySelector('.plate-seq');
+        const plates = seq ? [...seq.querySelectorAll('img')] : [];
+
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        function onScroll() {
+          if (burger) {
+            const r = burger.getBoundingClientRect();
+            const p = clamp(1 - (r.top + r.height * 0.3) / window.innerHeight, 0, 1);
+            const spread = p * (burger.offsetHeight * 0.16);
+            const mid = (layers.length - 1) / 2;
+            layers.forEach((l, i) => { l.style.transform = `translateY(${(i - mid) * spread}px)`; });
+          }
+          if (seq && plates.length) {
+            const r = seq.getBoundingClientRect();
+            const p = clamp(1 - (r.top + r.height * 0.25) / window.innerHeight, 0, 1);
+            const active = clamp(Math.floor(p * plates.length), 0, plates.length - 1);
+            plates.forEach((im, i) => im.classList.toggle('on', i <= active));
+          }
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        onScroll();
+      } else {
+        // reduced-motion : tout affiché à plat
+        document.querySelectorAll('.plate-seq img').forEach((im) => im.classList.add('on'));
+      }
+    </script>
+  </body>
+</html>
