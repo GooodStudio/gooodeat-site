@@ -32,6 +32,11 @@ const plats = defineCollection({
       .array(z.object({ nom: z.string(), part: z.number(), couleur: z.string().optional() }))
       .default([]),
     equilibrer: z.array(z.string()).default([]), // conseils "comment rééquilibrer"
+    // Données communauté agrégées et anonymisées (issues des scans gooodeat).
+    communaute: z.object({ scans: z.number(), users: z.number() }).optional(),
+    // Si présent, familles + communaute sont lues depuis src/data/plats-scans.json
+    // (snapshot régénéré depuis les scans). L'éditorial reste dans le .md.
+    dataKey: z.string().optional(),
   }),
 });
 

@@ -16,13 +16,14 @@ interface Props {
   sources?: { label: string; url?: string }[];
   familles?: { nom: string; part: number; couleur?: string }[];
   equilibrer?: string[];
+  communaute?: { scans: number; users: number };
   draft?: boolean;
   crumbs: Crumb[];
 }
 
 const {
   kind, slug, title, description, answer, updated, reviewedBy,
-  faq = [], sources = [], familles = [], equilibrer = [], draft = false, crumbs,
+  faq = [], sources = [], familles = [], equilibrer = [], communaute, draft = false, crumbs,
 } = Astro.props;
 
 const path = `/${kind === 'guide' ? 'guides' : 'plats'}/${slug}/`;
@@ -77,7 +78,9 @@ const jsonld = [breadcrumbLd, articleLd, ...(faqLd ? [faqLd] : [])];
       {familles.length > 0 && (
         <div class="famille-card">
           <h2 style="margin-top:0">Composition typique</h2>
-          <p class="muted">Approche qualitative gooodeat, agrégée et anonymisée. Pas de calories, pas de grammes.</p>
+          {communaute
+            ? <p class="muted">Moyenne observée sur <strong>{communaute.scans} scans</strong> de la communauté gooodeat ({communaute.users} personnes). Agrégée et anonymisée, sans calories ni grammes.</p>
+            : <p class="muted">Approche qualitative gooodeat, agrégée et anonymisée. Pas de calories, pas de grammes.</p>}
           {familles.map((f) => (
             <div class="bar-row"><span class="lab">{f.nom}</span><span class="bar"><span style={`width:${f.part}%;background:${f.couleur ?? 'var(--accent)'}`}></span></span><b>{f.part}%</b></div>
           ))}

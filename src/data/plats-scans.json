@@ -1,0 +1,226 @@
+{
+  "_note": "Snapshot AGRÉGÉ et ANONYMISÉ des scans gooodeat (public.plats_agrege, k>=5). Régénéré par scripts/generate-plats.mjs. Ne PAS éditer à la main.",
+  "_generatedFrom": "supabase rpc plats_agrege",
+  "_snapshotDate": "2026-08-29",
+  "plats": {
+    "spaghetti-bolognaise": {
+      "communaute": {
+        "scans": 24,
+        "users": 15
+      },
+      "familles": [
+        {
+          "nom": "Féculents",
+          "part": 52,
+          "couleur": "#c9a25b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 16,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 12,
+          "couleur": "#b0b0b0"
+        },
+        {
+          "nom": "Légumes",
+          "part": 11,
+          "couleur": "#21bf2b"
+        }
+      ]
+    },
+    "salade-de-pates": {
+      "communaute": {
+        "scans": 23,
+        "users": 17
+      },
+      "familles": [
+        {
+          "nom": "Féculents",
+          "part": 32,
+          "couleur": "#c9a25b"
+        },
+        {
+          "nom": "Légumes",
+          "part": 30,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 20,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 13,
+          "couleur": "#b0b0b0"
+        }
+      ]
+    },
+    "sandwich-jambon-fromage": {
+      "communaute": {
+        "scans": 21,
+        "users": 14
+      },
+      "familles": [
+        {
+          "nom": "Féculents",
+          "part": 35,
+          "couleur": "#c9a25b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 32,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Légumes",
+          "part": 15,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 13,
+          "couleur": "#b0b0b0"
+        }
+      ]
+    },
+    "pates-sauce-tomate": {
+      "communaute": {
+        "scans": 19,
+        "users": 13
+      },
+      "familles": [
+        {
+          "nom": "Féculents",
+          "part": 50,
+          "couleur": "#c9a25b"
+        },
+        {
+          "nom": "Légumes",
+          "part": 17,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 16,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 7,
+          "couleur": "#b0b0b0"
+        }
+      ]
+    },
+    "salade-tomate-mozzarella": {
+      "communaute": {
+        "scans": 17,
+        "users": 11
+      },
+      "familles": [
+        {
+          "nom": "Légumes",
+          "part": 50,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 21,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 17,
+          "couleur": "#b0b0b0"
+        },
+        {
+          "nom": "Féculents",
+          "part": 11,
+          "couleur": "#c9a25b"
+        }
+      ]
+    },
+    "soupe-de-legumes": {
+      "communaute": {
+        "scans": 12,
+        "users": 8
+      },
+      "familles": [
+        {
+          "nom": "Légumes",
+          "part": 75,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Féculents",
+          "part": 10,
+          "couleur": "#c9a25b"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 5,
+          "couleur": "#b0b0b0"
+        }
+      ]
+    },
+    "saumon-et-legumes": {
+      "communaute": {
+        "scans": 12,
+        "users": 10
+      },
+      "familles": [
+        {
+          "nom": "Légumes",
+          "part": 39,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 28,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 18,
+          "couleur": "#b0b0b0"
+        },
+        {
+          "nom": "Féculents",
+          "part": 16,
+          "couleur": "#c9a25b"
+        }
+      ]
+    },
+    "salade-de-lentilles": {
+      "communaute": {
+        "scans": 10,
+        "users": 7
+      },
+      "familles": [
+        {
+          "nom": "Légumes",
+          "part": 38,
+          "couleur": "#21bf2b"
+        },
+        {
+          "nom": "Protéines",
+          "part": 29,
+          "couleur": "#ff8000"
+        },
+        {
+          "nom": "Féculents",
+          "part": 22,
+          "couleur": "#c9a25b"
+        },
+        {
+          "nom": "Matières grasses",
+          "part": 6,
+          "couleur": "#b0b0b0"
+        }
+      ]
+    }
+  }
+}
