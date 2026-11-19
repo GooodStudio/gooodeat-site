@@ -91,6 +91,9 @@ const graphs = [orgLd, appLd, ...(Array.isArray(jsonld) ? jsonld : jsonld ? [jso
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(graphs)} />
+
+    <!-- Mesure d'audience DataFast, sans cookie (voir public/js/mesure.js) -->
+    <script is:inline src="/js/mesure.js" defer></script>
   </head>
   <body>
     <a href="#main" class="skip-link">Aller au contenu</a>

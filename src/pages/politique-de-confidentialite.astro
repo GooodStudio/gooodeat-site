@@ -13,7 +13,7 @@ import Base from '../layouts/Base.astro';
   <section class="section" style="padding-top:0">
     <div class="wrap prose">
       <p>Merci d'utiliser gooodeat. Ta vie privée est importante pour nous. Cette politique explique quelles données nous collectons, comment nous les utilisons et comment nous les protégeons.</p>
-      <p class="muted">Dernière mise à jour : août 2026</p>
+      <p class="muted">Dernière mise à jour : novembre 2026</p>
 
       <h2>1. Préambule</h2>
       <p>La présente Politique de confidentialité décrit comment Goood Studio, société établie à Namur (Belgique), collecte, utilise et protège tes données personnelles lorsque tu utilises gooodeat, notre assistant nutrition disponible sous forme d'application mobile (iOS, Android), d'application web et de site internet (gooodeat.com).</p>
@@ -64,6 +64,7 @@ import Base from '../layouts/Base.astro';
         <li>Identifiant de compte (UUID), date de création, dernière connexion</li>
         <li>Logs d'erreur, type d'appareil, système d'exploitation, version d'app</li>
         <li>Cookies strictement nécessaires (session, authentification)</li>
+        <li>Sur le site gooodeat.com : statistiques de visite sans cookie (pages vues, provenance, type d'appareil, pays), voir le <a href="#cookies">point 10</a></li>
       </ul>
 
       <h2>4. Finalités et bases légales</h2>
@@ -78,6 +79,7 @@ import Base from '../layouts/Base.astro';
           <tr><td>Sécurité, prévention de la fraude, intégrité du service</td><td>Intérêt légitime (art. 6.1.f RGPD)</td></tr>
           <tr><td>Facturation des abonnements, comptabilité</td><td>Obligation légale (art. 6.1.c RGPD)</td></tr>
           <tr><td>Amélioration du service (analytics agrégés et anonymes)</td><td>Intérêt légitime</td></tr>
+          <tr><td>Mesure d'audience du site gooodeat.com, sans cookie</td><td>Intérêt légitime (art. 6.1.f RGPD)</td></tr>
         </tbody>
       </table>
 
@@ -125,6 +127,7 @@ import Base from '../layouts/Base.astro';
         <tbody>
           <tr><td>Supabase</td><td>Hébergement base de données, authentification, stockage</td><td>Union européenne</td></tr>
           <tr><td>GitHub Pages</td><td>Hébergement du site vitrine (gooodeat.com)</td><td>États-Unis (CCT)</td></tr>
+          <tr><td>DataFast (JustShipIt Pte. Ltd.)</td><td>Mesure d'audience du site vitrine, sans cookie (voir point 10)</td><td>Hors UE, notamment États-Unis (CCT)</td></tr>
           <tr><td>Lovable</td><td>Hébergement de l'application web</td><td>Union européenne</td></tr>
           <tr><td>Resend</td><td>Envoi d'emails transactionnels</td><td>États-Unis (CCT)</td></tr>
           <tr><td>RevenueCat</td><td>Gestion des abonnements in-app</td><td>États-Unis (CCT)</td></tr>
@@ -165,10 +168,14 @@ import Base from '../layouts/Base.astro';
       <h2>9. Tes droits</h2>
       <p>Conformément au RGPD, tu disposes des droits suivants sur tes données : accès, rectification, effacement, portabilité, opposition, limitation, et retrait du consentement à tout moment (sans que cela n'affecte la licéité des traitements antérieurs).</p>
       <p>Pour exercer ces droits, contacte-nous à <a href="mailto:annecharlotte@gooodeat.com">annecharlotte@gooodeat.com</a>. Nous répondons dans un délai maximum d'un mois.</p>
-      <p>Tu as également le droit d'introduire une réclamation auprès de l'Autorité de protection des données (APD) : Rue de la Presse 35, 1000 Bruxelles — <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener">www.autoriteprotectiondonnees.be</a></p>
+      <p>Tu as également le droit d'introduire une réclamation auprès de l'Autorité de protection des données (APD) : Rue de la Presse 35, 1000 Bruxelles, <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener">www.autoriteprotectiondonnees.be</a></p>
 
-      <h2>10. Cookies et traceurs</h2>
-      <p>Le site et l'application n'utilisent que des cookies strictement nécessaires à leur fonctionnement (session, authentification, préférences d'affichage). Nous n'utilisons aucun cookie publicitaire ni traceur tiers à des fins de profilage commercial.</p>
+      <h2 id="cookies">10. Cookies et mesure d'audience</h2>
+      <p><b>Sur le site gooodeat.com, une mesure de base, sans cookie.</b> Pour savoir combien de personnes visitent le site et ce qui leur est utile, nous utilisons DataFast (datafa.st) dans son mode « sans cookie » : aucun cookie n'est déposé et aucune donnée n'est envoyée à Google. DataFast compte les pages consultées, la provenance des visites (moteur de recherche, réseau social…), le type d'appareil et de navigateur, le pays, et quelques clics utiles (vers l'App Store ou Google Play, vers notre adresse email). Les visites sont reconnues par un identifiant anonyme calculé sur le serveur de DataFast et renouvelé chaque jour ; seul un identifiant de session temporaire est gardé dans ton navigateur, effacé à la fermeture de l'onglet.</p>
+      <p>Base légale : notre intérêt légitime à mesurer la fréquentation du site (article 6.1.f du RGPD). Tu peux t'y opposer à tout moment en nous écrivant à <a href="mailto:info@gooodeat.com">info@gooodeat.com</a>. DataFast est exploité par JustShipIt Pte. Ltd. ; une partie de son infrastructure se trouve hors de l'Union européenne, notamment aux États-Unis, avec des clauses contractuelles types.</p>
+      <p><b>Pas de bandeau, parce que pas de cookie de mesure.</b> Le site n'utilise ni Google Analytics, ni cookie publicitaire, ni traceur de profilage. Si un outil soumis à ton accord devait s'ajouter, nous te le demanderions d'abord et cette page serait mise à jour.</p>
+      <p><b>Dans l'application</b>, nous n'utilisons que des cookies et stockages strictement nécessaires à son fonctionnement (session, authentification, préférences d'affichage), et aucun cookie publicitaire ni traceur tiers à des fins de profilage commercial.</p>
+      <p>Les liens vers l'App Store, Google Play, Instagram et LinkedIn t'emmènent sur ces services, qui appliquent leur propre politique de confidentialité.</p>
 
       <h2>11. Mineurs</h2>
       <p>gooodeat est destiné aux personnes âgées de 16 ans ou plus. Si tu as moins de 16 ans, l'utilisation du service requiert l'accord d'un·e titulaire de l'autorité parentale. Nous ne collectons pas sciemment de données concernant des enfants de moins de 13 ans.</p>
@@ -179,7 +186,7 @@ import Base from '../layouts/Base.astro';
       <h2>13. Contact</h2>
       <p>Pour toute question relative à cette politique ou au traitement de tes données :<br />
       Email : <a href="mailto:info@gooodeat.com">info@gooodeat.com</a><br />
-      Éditeur : Goood Studio SRL — Namur, Belgique</p>
+      Éditeur : Goood Studio SRL, Namur, Belgique</p>
 
       <p class="muted">Le présent document a été rédigé avec soin mais ne constitue pas un avis juridique. Une relecture par un·e avocat·e spécialisé·e en protection des données est recommandée avant publication officielle.</p>
     </div>
